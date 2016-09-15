@@ -11,11 +11,11 @@ import Foundation
 /**
  `MinLengthRule` is a subclass of Rule that defines how minimum character length is validated.
  */
-public class MinLengthRule: Rule {
+open class MinLengthRule: Rule {
     /// Default minimum character length.
-    private var DEFAULT_LENGTH: Int = 3
+    fileprivate var DEFAULT_LENGTH: Int = 3
     /// Default error message to be displayed if validation fails.
-    private var message : String = "Must be at least 3 characters long"
+    fileprivate var message : String = "Must be at least 3 characters long"
     
     /// - returns: An initialized `MinLengthRule` object, or nil if an object could not be created for some reason that would not result in an exception.
     public init(){}
@@ -29,7 +29,7 @@ public class MinLengthRule: Rule {
      */
     public init(length: Int, message : String = "Must be at least %ld characters long"){
         self.DEFAULT_LENGTH = length
-        self.message = NSString(format: message, self.DEFAULT_LENGTH) as String
+        self.message = NSString(format: message as NSString, self.DEFAULT_LENGTH) as String
     }
     
     /**
@@ -37,7 +37,7 @@ public class MinLengthRule: Rule {
      - parameter value: String to checked for validation.
      - returns: A boolean value. True if validation is successful; False if validation fails.
      */
-    public func validate(value: String) -> Bool {
+    open func validate(_ value: String) -> Bool {
         return value.characters.count >= DEFAULT_LENGTH
     }
     
@@ -46,7 +46,7 @@ public class MinLengthRule: Rule {
      
      - returns: String of error message.
      */
-    public func errorMessage() -> String {
+    open func errorMessage() -> String {
         return message
     }
 }

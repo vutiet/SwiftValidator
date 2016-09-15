@@ -11,13 +11,13 @@ import UIKit
 /**
  `ValidationRule` is a class that creates an object which holds validation info of a field.
  */
-public class ValidationRule {
+open class ValidationRule {
     /// the field of the field
-    public var field:ValidatableField
+    open var field:ValidatableField
     /// the errorLabel of the field
-    public var errorLabel:UILabel?
+    open var errorLabel:UILabel?
     /// the rules of the field
-    public var rules:[Rule] = []
+    open var rules:[Rule] = []
     
     /**
      Initializes `ValidationRule` instance with field, rules, and errorLabel.
@@ -37,7 +37,7 @@ public class ValidationRule {
      Used to validate field against its validation rules.
      - returns: `ValidationError` object if at least one error is found. Nil is returned if there are no validation errors.
      */
-    public func validateField() -> ValidationError? {
+    open func validateField() -> ValidationError? {
         return rules.filter{
             return !$0.validate(field.validationText ?? "")
             }.map{ rule -> ValidationError in return ValidationError(field: self.field, errorLabel:self.errorLabel, error: rule.errorMessage()) }.first
